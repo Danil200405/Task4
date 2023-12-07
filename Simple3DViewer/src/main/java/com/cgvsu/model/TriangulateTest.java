@@ -1,0 +1,207 @@
+package com.cgvsu.model;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class TriangulateTest {
+
+
+    @Test
+    void triangulateWithSinglePointModel() {
+        // Создаем модель с одной вершиной
+        Model model = new Model();
+        model.vertices.addAll (new ArrayList(Arrays.asList(0, 0, 0)));
+
+        // Триангулируем модель
+        TriangulateModel result = Triangulate.triangulate(model);
+
+        // Проверяем, что результат также содержит одну вершину (без полигонов)
+        assertEquals(0, result.polygons.size());
+        assertEquals(3, result.vertices.size());
+    }
+
+    @Test
+    void triangulateWithTwoPointModel() {
+        // Создаем модель с двумя вершинами
+        Model model = new Model();
+        model.vertices.addAll(new ArrayList(Arrays.asList(0, 0, 0, 1, 1, 1)));
+
+        // Триангулируем модель
+        TriangulateModel result = Triangulate.triangulate(model);
+
+        // Проверяем, что результат также содержит две вершины (без полигонов)
+        assertEquals(0, result.polygons.size());
+        assertEquals(6, result.vertices.size());
+    }
+
+
+    @Test
+    void triangulateWithEmptyModel() {
+        // Создаем пустую модель
+        Model model = new Model();
+
+        // Триангулируем модель
+        TriangulateModel result = Triangulate.triangulate(model);
+
+        // Проверяем, что результат также пуст
+        assertEquals(0, result.polygons.size());
+    }
+
+    @Test
+    void triangulate() {
+// Создаем простую модель для тестирования
+        Model model = new Model();
+        new ArrayList(Arrays.asList(0, 0, 0,
+                1, 0, 0,
+                1, 1, 0));
+
+
+
+        ArrayList<Integer> indices = new ArrayList<>();
+        indices.add(0);
+        indices.add(1);
+        indices.add(2);
+
+        Polygon polygon = new Polygon();
+        polygon.setVertexIndices(indices);
+
+        model.polygons.add(polygon);
+
+// Триангулируем модель
+        TriangulateModel result = Triangulate.triangulate(model);
+        System.out.println(result.polygons.size());
+
+// Проверяем, что результат содержит правильное количество треугольников
+        assertEquals(1, result.polygons.size());
+
+
+    }
+
+    @Test
+    void triangulateWithQuadrilateral() {
+// Создаем модель с четырехугольником
+        Model model = new Model();
+        model.vertices.addAll( new ArrayList(Arrays.asList(0, 0, 0,
+                1, 0, 0,
+                1, 1, 0,
+                0, 1, 0)));
+
+        ArrayList<Integer> indices = new ArrayList<>();
+        indices.add(0);
+        indices.add(1);
+        indices.add(2);
+        indices.add(3);
+
+        Polygon polygon = new Polygon();
+        polygon.setVertexIndices(indices);
+
+        model.polygons.add(polygon);
+
+// Триангулируем модель
+        TriangulateModel result = Triangulate.triangulate(model);
+
+// Проверяем, что результат содержит правильное количество треугольников
+        assertEquals(2, result.polygons.size());
+    }
+
+    @Test
+    void triangulateWithMultiplePolygons() {
+        // Создаем модель с несколькими полигонами
+        Model model = new Model();
+        model.vertices.addAll(new ArrayList(Arrays.asList(0,0,0,1,0,0,1,1,0,0,1,0,0.5,0.5,1,1.5,0.5,1)));
+
+        // Первый полигон с тремя вершинами
+        ArrayList<Integer> indices1 = new ArrayList<>(Arrays.asList(0, 1, 2));
+        Polygon polygon1 = new Polygon();
+        polygon1.setVertexIndices(indices1);
+        model.polygons.add(polygon1);
+
+        // Второй полигон с тремя вершинами
+        ArrayList<Integer> indices2 = new ArrayList<>(Arrays.asList(2, 3, 0));
+        Polygon polygon2 = new Polygon();
+        polygon2.setVertexIndices(indices2);
+        model.polygons.add(polygon2);
+
+        // Триангулируем модель
+        TriangulateModel result = Triangulate.triangulate(model);
+
+        // Проверяем, что результат содержит правильное количество треугольников
+        assertEquals(2, result.polygons.size());
+    }
+
+
+    @Test
+    void triangulateWithConvexHexagon() {
+        // Создаем модель с выпуклым шестиугольником
+        Model model = new Model();
+        model.vertices.addAll(new ArrayList(Arrays.asList(
+                0, 0, 0,
+                1, 0, 0,
+                1.5, 0.5, 0,
+                1, 1, 0,
+                0, 1, 0,
+                -0.5, 0.5, 0
+        )));
+
+        ArrayList<Integer> indices = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5));
+        Polygon polygon = new Polygon();
+        polygon.setVertexIndices(indices);
+        model.polygons.add(polygon);
+
+        // Триангулируем модель
+        TriangulateModel result = Triangulate.triangulate(model);
+
+        // Проверяем, что результат содержит правильное количество треугольников
+        assertEquals(4, result.polygons.size());
+    }
+
+    @Test
+    void triangulateWithMultipleHeptagons() {
+        // Создаем модель с несколькими семиугольными выпуклыми полигонами
+        Model model = new Model();
+        model.vertices.addAll(new ArrayList(Arrays.asList(
+                // Первый семиугольник
+                0, 0, 0,
+                1, 0, 0,
+                1.5, 0.5, 0,
+                1, 1, 0,
+                0, 1, 0,
+                -0.5, 0.5, 0,
+                -0.2, 0, 0,
+
+                // Второй семиугольник
+                2, 0, 0,
+                3, 0, 0,
+                3.5, 0.5, 0,
+                3, 1, 0,
+                2, 1, 0,
+                1.5, 0.5, 0,
+                1.8, 0, 0
+        )));
+
+        // Первый семиугольник
+        ArrayList<Integer> indices1 = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
+        Polygon polygon1 = new Polygon();
+        polygon1.setVertexIndices(indices1);
+        model.polygons.add(polygon1);
+
+        // Второй семиугольник
+        ArrayList<Integer> indices2 = new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12, 13));
+        Polygon polygon2 = new Polygon();
+        polygon2.setVertexIndices(indices2);
+        model.polygons.add(polygon2);
+
+        // Триангулируем модель
+        TriangulateModel result = Triangulate.triangulate(model);
+
+        // Проверяем, что результат содержит правильное количество треугольников
+        assertEquals(10, result.polygons.size());
+    }
+
+
+
+}
