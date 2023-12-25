@@ -82,8 +82,9 @@ public class GuiController {
         try {
             String fileContent = Files.readString(fileName);
             mesh = ObjReader.read(fileContent);
-             TriangulateModel TModel = Triangulate.triangulate(mesh);
-            mesh.setModel(TModel);
+
+            //TriangulateModel TModel = Triangulate.triangulate(mesh);
+            //mesh.setModel(TModel);
 
             // todo: обработка ошибок
         } catch (IOException exception) {

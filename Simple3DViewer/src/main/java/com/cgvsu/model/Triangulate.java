@@ -9,7 +9,7 @@ public class Triangulate {
         result.setModel(model);
 
         // Очистите список polygons в результирующей модели перед добавлением триангулированных полигонов
-        result.polygons.clear();
+        result.getPolygons().clear();
 
 
         ArrayList<Polygon> triangles = new ArrayList<>();
@@ -30,7 +30,7 @@ public class Triangulate {
             } else if (vertexIndices.size() == 3) triangles.add(polygon);
         }
 
-        result.polygons.addAll(triangles);
+        result.setPolygons(triangles);
         return result;
     }
 }

@@ -20,8 +20,8 @@ class TriangulateTest {
         TriangulateModel result = Triangulate.triangulate(model);
 
         // Проверяем, что результат также содержит одну вершину (без полигонов)
-        assertEquals(0, result.polygons.size());
-        assertEquals(3, result.vertices.size());
+        assertEquals(0, result.getPolygons().size());
+        assertEquals(1, result.getVertices().size());
     }
 
     @Test
@@ -33,9 +33,9 @@ class TriangulateTest {
         // Триангулируем модель
         TriangulateModel result = Triangulate.triangulate(model);
 
-        // Проверяем, что результат также содержит две вершины (без полигонов)
-        assertEquals(0, result.polygons.size());
-        assertEquals(6, result.vertices.size());
+        // Проверяем, что результат также содержит правильное кол-во вершин (без полигонов)
+        assertEquals(0, result.getPolygons().size());
+        assertEquals(6, result.getVertices().size());
     }
 
 
@@ -48,7 +48,7 @@ class TriangulateTest {
         TriangulateModel result = Triangulate.triangulate(model);
 
         // Проверяем, что результат также пуст
-        assertEquals(0, result.polygons.size());
+        assertEquals(0, result.getPolygons().size());
     }
 
     @Test
@@ -73,10 +73,10 @@ class TriangulateTest {
 
 // Триангулируем модель
         TriangulateModel result = Triangulate.triangulate(model);
-        System.out.println(result.polygons.size());
+        System.out.println(result.getPolygons().size());
 
 // Проверяем, что результат содержит правильное количество треугольников
-        assertEquals(1, result.polygons.size());
+        assertEquals(1, result.getPolygons().size());
 
 
     }
@@ -105,7 +105,7 @@ class TriangulateTest {
         TriangulateModel result = Triangulate.triangulate(model);
 
 // Проверяем, что результат содержит правильное количество треугольников
-        assertEquals(2, result.polygons.size());
+        assertEquals(2, result.getPolygons().size());
     }
 
     @Test
@@ -130,7 +130,8 @@ class TriangulateTest {
         TriangulateModel result = Triangulate.triangulate(model);
 
         // Проверяем, что результат содержит правильное количество треугольников
-        assertEquals(2, result.polygons.size());
+        assertEquals(2, result.getPolygons().size());
+        assertEquals(18, result.getPolygons().size());
     }
 
 
@@ -156,7 +157,7 @@ class TriangulateTest {
         TriangulateModel result = Triangulate.triangulate(model);
 
         // Проверяем, что результат содержит правильное количество треугольников
-        assertEquals(4, result.polygons.size());
+        assertEquals(4, result.getPolygons().size());
     }
 
     @Test
@@ -199,7 +200,7 @@ class TriangulateTest {
         TriangulateModel result = Triangulate.triangulate(model);
 
         // Проверяем, что результат содержит правильное количество треугольников
-        assertEquals(10, result.polygons.size());
+        assertEquals(10, result.getPolygons().size());
     }
 
 

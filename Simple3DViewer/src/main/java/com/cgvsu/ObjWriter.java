@@ -1,8 +1,9 @@
 package com.cgvsu;
-import com.cgvsu.math.Vector2f;
-import com.cgvsu.math.Vector3f;
+import com.cgvsu.math.vector.Vector2f;
+import com.cgvsu.math.vector.Vector3f;
 import com.cgvsu.model.Model;
 import com.cgvsu.model.Polygon;
+
 
 
 
