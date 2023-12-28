@@ -30,9 +30,9 @@ public class RenderEngine {
 
             ArrayList<Point2f> resultPoints = new ArrayList<>();
             for (int vertexInPolygonInd = 0; vertexInPolygonInd < nVerticesInPolygon; ++vertexInPolygonInd) {
-                com.cgvsu.math.vector.Vector3f vertex = mesh.vertices.get(mesh.polygons.get(polygonInd).getVertexIndices().get(vertexInPolygonInd));
+                com.cgvsu.math.Vector3f vertex = mesh.vertices.get(mesh.polygons.get(polygonInd).getVertexIndices().get(vertexInPolygonInd));
 
-                javax.vecmath.Vector3f vertexVecmath = new javax.vecmath.Vector3f((float) vertex.x, (float) vertex.y, (float) vertex.z);
+                Vector3f vertexVecmath = new Vector3f(vertex.getX(), vertex.getY(), vertex.getZ());
 
                 Point2f resultPoint = vertexToPoint(multiplyMatrix4ByVector3(modelViewProjectionMatrix, vertexVecmath), width, height);
                 resultPoints.add(resultPoint);

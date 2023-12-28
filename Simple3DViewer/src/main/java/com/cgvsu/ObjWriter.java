@@ -1,6 +1,6 @@
 package com.cgvsu;
-import com.cgvsu.math.vector.Vector2f;
-import com.cgvsu.math.vector.Vector3f;
+import com.cgvsu.math.Vector2f;
+import com.cgvsu.math.Vector3f;
 import com.cgvsu.model.Model;
 import com.cgvsu.model.Polygon;
 
@@ -11,13 +11,13 @@ public class ObjWriter {
     public static String modelToString(Model model) {
         StringBuilder stringBuilder = new StringBuilder();
         for(Vector3f v: model.vertices) {
-            stringBuilder.append("v " + v.x + " " + v.y + " " + v.z + "\n");
+            stringBuilder.append("v " + v.getX() + " " + v.getY() + " " + v.getZ() + "\n");
         }
         for (Vector2f v: model.textureVertices) {
-            stringBuilder.append("t " + v.x + " " + v.y  + "\n");
+            stringBuilder.append("t " + v.getX() + " " + v.getY() + "\n");
         }
         for (Vector3f v: model.normals) {
-            stringBuilder.append("vn " + v.x + " " + v.y + " " + v.z + "\n");
+            stringBuilder.append("vn " + v.getX() + " " + v.getY() + " " + v.getZ() + "\n");
         }
         for (Polygon p: model.polygons) {
             int size =  p.getVertexIndices().size();
