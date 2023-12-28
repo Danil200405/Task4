@@ -1,6 +1,6 @@
 package com.cgvsu.render_engine;
-import javax.vecmath.Vector3f;
-import javax.vecmath.Matrix4f;
+import com.cgvsu.math.*;
+
 
 public class Camera {
 
@@ -39,13 +39,18 @@ public class Camera {
         return target;
     }
 
-    public void movePosition(final Vector3f translation) {
-        this.position.add(translation);
+    //где-то тут ошибка
+    public void movePosition(final Vector3f translation) {this.position.plusToThis(translation);}
+    /*
+    //либо тут
+    public void moveTarget(final Vector3f translation) {
+        this.target.plusToThis(target);
+    }*/
+    public void moveTarget(final Vector3f translation) {
+        this.target.plusToThis(translation);
     }
 
-    public void moveTarget(final Vector3f translation) {
-        this.target.add(target);
-    }
+
 
     Matrix4f getViewMatrix() {
         return GraphicConveyor.lookAt(position, target);

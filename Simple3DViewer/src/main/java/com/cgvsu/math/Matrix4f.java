@@ -27,12 +27,31 @@ public class Matrix4f {
             throw new ArithmeticException("The number of columns of one of the matrices is not equal to the number of rows");
         }
     }
+    /**
+     * Конструктор матрицы через одномерный массив float.
+     */
+    public Matrix4f(float[] values) {
+        if (values.length == 16) {
+            float[][] res = new float[4][4];
+            for(int i = 0; i< 4;i++){
+                for(int k = 0; k<4;k++){
+                    res[i][k] = values[i*4+k];
+                }
+            }
+            this.values = res;
+        } else {
+            throw new ArithmeticException("The number of columns of one of the matrices is not equal to the number of rows");
+        }
+    }
 
     /**
      * Конструктор матрицы через другую матрицу Matrix4f.
      */
     public Matrix4f(Matrix4f matrix) {
         this.values = matrix.values;
+    }
+    public Matrix4f() {
+        this.values = new float[4][4];
     }
 
     /**
@@ -182,10 +201,23 @@ public class Matrix4f {
         return values;
     }
 
+
     @Override
     public String toString() {
-        return "Matrix4f{" +
-                "values=" + Arrays.toString(values) +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Matrix4f{\n");
+        for (int i = 0; i < size; i++) {
+            stringBuilder.append("  [");
+            for (int j = 0; j < size; j++) {
+                stringBuilder.append(values[i][j]);
+                if (j < size - 1) {
+                    stringBuilder.append(", ");
+                }
+            }
+            stringBuilder.append("]\n");
+        }
+        stringBuilder.append("}");
+        return stringBuilder.toString();
     }
-}//hello
+
+}

@@ -8,7 +8,7 @@ import java.util.Objects;
  *
  * @version 1.3
  */
-public class Vector3f {
+public class Vector3f  {
     /**
      * Поле х.
      */
@@ -82,6 +82,10 @@ public class Vector3f {
             this.z = floats.get(2);
             this.length = (float) Math.sqrt((floats.get(0) * floats.get(0)) + (floats.get(1) * floats.get(1)) + (floats.get(2) * floats.get(2)));
         }
+    }
+
+    public Vector3f() {
+
     }
 
     /**
@@ -189,6 +193,7 @@ public class Vector3f {
      *
      * @return Новый вектор.
      */
+
     public Vector3f normalize() {
         return this.divide(length);
     }
